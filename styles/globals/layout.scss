@@ -1,0 +1,173 @@
+// * {
+//   border: 1px solid blue;
+// }
+
+/* Layout Styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+body {
+  height: 100vh;
+  margin: auto;
+  max-width: 1200px;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Columns
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+section {
+  padding: 0 20px;
+  // width: 100%;
+}
+
+.two-column {
+  display: flex;
+
+  section {
+    padding: 0 20px;
+    width: 66%;
+  }
+  aside {
+    padding: 0 20px 0 0;
+    width: 34%;
+  }
+}
+
+@media (max-width: 600px) {
+  .two-column {
+    flex-direction: column;
+    section {
+      width: 100%;
+    }
+    aside {
+      padding: 0 20px;
+      width: 100%;
+    }
+  }
+}
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.primary-button {
+  a {
+    color: #fff;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  background: var(--blue-070);
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-decoration: none;
+  &:hover {
+    background: var(--blue-080);
+  }
+}
+
+.secondary-button {
+  a {
+    color: #fff;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  background: var(--black-080);
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-decoration: none;
+  &:hover {
+    background: var(--black-100);
+  }
+}
+
+.ghost-button {
+  background: none;
+  border-radius: 5px;
+  border: 2px solid var(--blue-060);
+  color: var(--blue-070);
+  cursor: pointer;
+  font-weight: bold;
+  padding: 8px 18px;
+  text-decoration: none;
+  a {
+    color: var(--blue-060);
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &:hover {
+    background: var(--blue-010);
+    text-decoration: none;
+  }
+}
+
+.link-as-button {
+  a {
+    &:hover {
+      background: var(--blue-080);
+    }
+  }
+  background: var(--blue-070);
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 17px;
+  &:hover {
+    background: var(--blue-080);
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.button-as-link {
+  background: none;
+  border: none;
+  color: var(--blue-050);
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: var(--blue-030);
+    text-decoration: underline;
+  }
+}
+
+.big-button {
+  border-radius: 8px;
+  font-size: 1.5rem;
+  padding: 15px 30px;
+}
+
+/* Box Shadow
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.bs {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+    rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+    rgba(0, 0, 0, 0.07) 0px 16px 16px;
+}
+
+/* Dark Mode
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--black-090);
+    color: var(--black-010);
+  }
+}

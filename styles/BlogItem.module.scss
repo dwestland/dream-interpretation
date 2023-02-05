@@ -1,0 +1,43 @@
+.blogItem {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 20px auto;
+  max-width: 100%;
+  padding: 5px 0;
+}
+
+.row {
+  align-items: center;
+  display: flex;
+  height: 30 px;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.icons {
+  display: flex;
+  text-align: right;
+}
+
+.icon {
+  color: var(--blue-060);
+  cursor: pointer;
+}
+
+.small {
+  font-size: small;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+}
+
+.body {
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.anchorClass {
+  font-size: smaller;
+}

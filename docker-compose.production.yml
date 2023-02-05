@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: 'next-auth-prisma-blog-db'
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  app:
+    image: napb-app
+    build:
+      context: ./
+      dockerfile: Dockerfile.production
+    container_name: 'next-auth-prisma-blog-app'
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/next_auth_prisma_blog?schema=public
+
+    depends_on:
+      - db
+
+volumes:
+  postgres:
+#
+# docker-compose -f docker-compose.production.yml up --build --force-recreate
