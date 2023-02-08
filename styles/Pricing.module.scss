@@ -18,10 +18,22 @@
   border: 1px solid royalblue;
   background: #fff;
   border-radius: 10px;
-  height: 360px;
+  height: 420px;
   text-align: center;
   color: #000;
   width: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  // bottom: 0;
+  padding: 20px;
+  // position: fixed;
 }
 
 .price {

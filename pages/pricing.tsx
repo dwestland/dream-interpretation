@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Layout from '@/components/Layout'
 import styles from '@/styles/Pricing.module.scss'
+import { checkout } from '../src/common/checkout'
 
 const PricingPage = () => (
   <Layout title="Document" description="Document description">
@@ -11,30 +12,66 @@ const PricingPage = () => (
         <h3>Pricing for dream analysis</h3>
         <div className={`${styles.pricingCardContainer} pricingCard-container`}>
           <div className={styles.pricingCard}>
-            <h3 className={styles.price}>FREE</h3>
-            <h4>Starter</h4>
-            <p>3 Free Dreams</p>
-            <p>1 Free Dream each month for life*</p>
-            <button className={`${styles.button} primary-button`}>
-              Get Started
-            </button>
+            <main className={styles.main}>
+              <h3 className={styles.price}>FREE</h3>
+              <h4>Starter</h4>
+              <p>5 Free Dreams</p>
+              <p>1 Free Dream each month for life*</p>
+            </main>
+            <footer className={styles.footer}>
+              <button className={`${styles.button} primary-button`}>
+                Get Started
+              </button>
+            </footer>
           </div>
           <div className={styles.pricingCard}>
-            <h3 className={styles.price}>$7.95</h3>
-            <h4>Dreamer</h4>
-            <p>15 Dreams</p>
-            <button className={`${styles.button} primary-button`}>
-              Buy Now
-            </button>
+            <main className={styles.main}>
+              <h3 className={styles.price}>$7.95</h3>
+              <h4>Dreamer</h4>
+              <p>15 Dreams</p>
+            </main>
+            <footer className={styles.footer}>
+              <button
+                onClick={() => {
+                  checkout({
+                    lineItems: [
+                      {
+                        price: process.env.NEXT_PUBLIC_DREAMER_PRODUCT_PRICE,
+                        quantity: 1,
+                      },
+                    ],
+                  })
+                }}
+                className={`${styles.button} primary-button`}
+              >
+                Buy Now
+              </button>
+            </footer>
           </div>
           <div className={styles.pricingCard}>
-            <h3 className={styles.price}>$19.95</h3>
-            <h4>Advanced</h4>
-            <p>60 Dreams</p>
-            <p>35% Savings</p>
-            <button className={`${styles.button} primary-button`}>
-              Buy Now
-            </button>
+            <main className={styles.main}>
+              <h3 className={styles.price}>$19.95</h3>
+              <h4>Advanced</h4>
+              <p>60 Dreams</p>
+              <p>35% Savings</p>
+            </main>
+            <footer className={styles.footer}>
+              <button
+                onClick={() => {
+                  checkout({
+                    lineItems: [
+                      {
+                        price: process.env.NEXT_PUBLIC_ADVANCED_PRODUCT_PRICE,
+                        quantity: 1,
+                      },
+                    ],
+                  })
+                }}
+                className={`${styles.button} primary-button`}
+              >
+                Buy Now
+              </button>
+            </footer>
           </div>
         </div>
 
