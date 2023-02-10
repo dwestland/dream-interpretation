@@ -4,13 +4,28 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin: 100px auto 0;
+  margin: 20px auto 20px;
   max-width: 1200px;
-  margin-top: 100px;
-  border: 5px solid royalblue;
+  // margin-top: 100px;
+  // border: 5px solid royalblue;
   align-items: stretch;
   justify-content: space-between;
   max-width: 820px;
+}
+
+.tagLine {
+  font-size: 5rem;
+  letter-spacing: -0.15rem;
+  line-height: 1.2;
+  margin-top: 1.8rem;
+}
+
+.heading {
+  font-size: 3.2rem;
+  letter-spacing: -0.1rem;
+  line-height: 1;
+  margin: 3rem auto 2rem;
+  text-align: center;
 }
 
 .pricingCard {
@@ -18,7 +33,7 @@
   border: 1px solid royalblue;
   background: #fff;
   border-radius: 10px;
-  height: 420px;
+  height: 410px;
   text-align: center;
   color: #000;
   width: 240px;
@@ -28,6 +43,11 @@
 
 .main {
   flex: 1;
+}
+
+.paragraph {
+  font-size: 1.2rem;
+  margin: 40px 15%;
 }
 
 .footer {
@@ -40,6 +60,7 @@
   color: var(--blue-070);
   font-size: 3.4em;
   font-weight: 400;
+  margin-top: 40px;
 }
 
 .button {
@@ -49,7 +70,9 @@
 @media (max-width: 768px) {
   .pricingCardContainer {
     flex-direction: column;
-    margin-top: 20px;
+    // height: 350px;
+    // margin: 10px 5%;
+    // margin: 10px 10px;
   }
   .pricingCard {
     width: 100%;
