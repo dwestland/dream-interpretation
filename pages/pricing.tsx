@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import Layout from '@/components/Layout'
 import styles from '@/styles/Pricing.module.scss'
-import { checkout } from '../src/common/checkout'
 
 const PricingPage = () => (
   <Layout title="Document" description="Document description">
@@ -32,16 +31,16 @@ const PricingPage = () => (
             </main>
             <footer className={styles.footer}>
               <button
-                onClick={() => {
-                  checkout({
-                    lineItems: [
-                      {
-                        price: process.env.NEXT_PUBLIC_DREAMER_PRODUCT_PRICE,
-                        quantity: 1,
-                      },
-                    ],
-                  })
-                }}
+                // onClick={() => {
+                //   checkout({
+                //     lineItems: [
+                //       {
+                //         price: process.env.NEXT_PUBLIC_DREAMER_PRODUCT_PRICE,
+                //         quantity: 1,
+                //       },
+                //     ],
+                //   })
+                // }}
                 className={`${styles.button} primary-button`}
               >
                 Buy Now
@@ -57,16 +56,16 @@ const PricingPage = () => (
             </main>
             <footer className={styles.footer}>
               <button
-                onClick={() => {
-                  checkout({
-                    lineItems: [
-                      {
-                        price: process.env.NEXT_PUBLIC_ADVANCED_PRODUCT_PRICE,
-                        quantity: 1,
-                      },
-                    ],
-                  })
-                }}
+                // onClick={() => {
+                //   checkout({
+                //     lineItems: [
+                //       {
+                //         price: process.env.NEXT_PUBLIC_ADVANCED_PRODUCT_PRICE,
+                //         quantity: 1,
+                //       },
+                //     ],
+                //   })
+                // }}
                 className={`${styles.button} primary-button`}
               >
                 Buy Now
