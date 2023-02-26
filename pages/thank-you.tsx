@@ -1,7 +1,14 @@
-import Head from "next/head";
-import Link from "next/link";
+import { useEffect } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function ThankYou() {
+  const router = useRouter()
+  const { id } = router.query
+
+  console.log('%c id ', 'background: red; color: white', id)
+
   return (
     <div>
       <Head>
@@ -18,5 +25,5 @@ export default function ThankYou() {
         <Link href="/">Home</Link>
       </main>
     </div>
-  );
+  )
 }

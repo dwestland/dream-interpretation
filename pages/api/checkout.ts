@@ -41,7 +41,7 @@ export default async function handler(
           quantity,
         },
       ],
-      success_url: `${req.headers.origin}/thank-you`,
+      success_url: `${req.headers.origin}/thank-you?id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.origin}/cancel`,
     })
 
