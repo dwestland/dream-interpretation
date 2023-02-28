@@ -1,45 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Stripe from 'stripe'
 import queryKeys from '@/common/constants/queryKeys'
-import { stripe } from '@/common/stripe'
 
-export default function ThankYou() {
-  const router = useRouter()
-  const [session, setSession] = useState(null)
-
-  const { id } = router.query as { id: string }
-  console.log('%c id ', 'background: red; color: white', id)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const sessionData = await stripe.checkout.sessions.retrieve(id)
-      setSession(sessionData)
-    }
-    fetchData()
-  }, [router.query])
-
+export default function ThankYou({ session }) {
   return (
     <div>
       <Head>
         <title>Thank You</title>
-        <meta name="description" content="TomDoesTech" />
+        <meta name="description" content="Thank you page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="max-w-2xl p-4 m-auto flex">
+      <main>
         {session ? (
           <>
-            <div className="flex-1 p-4">
+            <div>
               <pre>
                 <code>{JSON.stringify(session, null, 2)}</code>
               </pre>
-              <h1 className="text-3xl font-bold">Thank you!</h1>
-              <p>Your donation has been received.</p>
+              <Link href="/">Home</Link>
+              <h1>Thank you!</h1>
             </div>
-            <Link href="/">Home</Link>
           </>
         ) : (
           <p>Loading...</p>
@@ -49,46 +33,17 @@ export default function ThankYou() {
   )
 }
 
-// import { useEffect, useState } from 'react'
-// import Head from 'next/head'
-// import { useRouter } from 'next/router'
-// import Link from 'next/link'
-// import Stripe from 'stripe'
+export async function getServerSideProps(context) {
+  const apiKey = String(process.env.STRIPE_SECRET_KEY)
+  const stripe = new Stripe(apiKey, {
+    apiVersion: '2022-11-15',
+  })
+  const { id } = context.query
+  const session = await stripe.checkout.sessions.retrieve(id as string)
 
-// export default async function ThankYou() {
-//   const router = useRouter()
-
-//   const { id } = router.query as { id: string }
-
-//   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-//     apiVersion: '2022-11-15',
-//   })
-
-//   const session = await stripe.checkout.sessions.retrieve(id)
-//   // const session = await stripe.checkout.session.retrieve(id)
-
-//   const prettyObject = JSON.stringify(session, null, 2)
-
-//   console.log('%c id ', 'background: red; color: white', id)
-
-//   return (
-//     <div>
-//       <Head>
-//         <title>Thank You</title>
-//         <meta name="description" content="TomDoesTech" />
-//         <link rel="icon" href="/favicon.ico" />
-//       </Head>
-
-//       <main className="max-w-2xl p-4 m-auto flex">
-//         <div className="flex-1 p-4">
-//           <pre>
-//             <code>{prettyObject}</code>
-//           </pre>
-//           <h1 className="text-3xl font-bold">Thank you!</h1>
-//           <p>Your donation has been received.</p>
-//         </div>
-//         <Link href="/">Home</Link>
-//       </main>
-//     </div>
-//   )
-// }
+  return {
+    props: {
+      session,
+    },
+  }
+}
