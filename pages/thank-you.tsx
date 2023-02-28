@@ -10,10 +10,11 @@ export default function ThankYou() {
   const router = useRouter()
   const [session, setSession] = useState(null)
 
+  const { id } = router.query as { id: string }
+  console.log('%c id ', 'background: red; color: white', id)
+
   useEffect(() => {
     const fetchData = async () => {
-      const { id } = router.query as { id: string }
-      console.log('%c id ', 'background: red; color: white', id)
       const sessionData = await stripe.checkout.sessions.retrieve(id)
       setSession(sessionData)
     }

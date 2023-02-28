@@ -1,22 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Layout from '@/components/Layout'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import styles from '@/styles/Pricing.module.scss'
 
 const PricingPage = () => {
   const { data: session, status } = useSession()
-  console.log(
-    '%c session.userId ',
-    'background: red; color: white',
-    // @ts-ignore
-    session.userId
-  )
-  console.log(
-    '%c session.user.email) ',
-    'background: red; color: white',
-    session.user.email
-  )
+  const [error, setError] = useState(null)
+  const router = useRouter()
+  const dreamer = {
+    name: 'Dreamer',
+    price: 'price_1MQIktIxBGmFOs7KcjHgsJ8P',
+  }
+  const advanced = {
+    name: 'Advanced',
+    price: 'price_1MQIk1IxBGmFOs7KVdgrzF7b',
+  }
+  const userEmail = session?.user?.email
+  // @ts-ignore
+  const user = session.userId
+
+  async function handleCheckout(product: Object) {
+    setError(null)
+
+    const response = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user,
+        userEmail,
+        product,
+      }),
+    })
+
+    const res = await response.json()
+
+    if (res.url) {
+      const url = res.url
+
+      router.push(url)
+    }
+    if (res.error) {
+      setError(res.error)
+    }
+  }
+
   const prettyObject = JSON.stringify(session, null, 2)
   return (
     <Layout title="Document" description="Document description">
@@ -51,16 +82,9 @@ const PricingPage = () => {
               </main>
               <footer className={styles.footer}>
                 <button
-                  // onClick={() => {
-                  //   checkout({
-                  //     lineItems: [
-                  //       {
-                  //         price: process.env.NEXT_PUBLIC_DREAMER_PRODUCT_PRICE,
-                  //         quantity: 1,
-                  //       },
-                  //     ],
-                  //   })
-                  // }}
+                  onClick={() => {
+                    handleCheckout(dreamer)
+                  }}
                   className={`${styles.button} primary-button`}
                 >
                   Buy Now
@@ -76,16 +100,9 @@ const PricingPage = () => {
               </main>
               <footer className={styles.footer}>
                 <button
-                  // onClick={() => {
-                  //   checkout({
-                  //     lineItems: [
-                  //       {
-                  //         price: process.env.NEXT_PUBLIC_ADVANCED_PRODUCT_PRICE,
-                  //         quantity: 1,
-                  //       },
-                  //     ],
-                  //   })
-                  // }}
+                  onClick={() => {
+                    handleCheckout(advanced)
+                  }}
                   className={`${styles.button} primary-button`}
                 >
                   Buy Now
