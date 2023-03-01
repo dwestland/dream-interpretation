@@ -1,9 +1,9 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Stripe from 'stripe'
-import queryKeys from '@/common/constants/queryKeys'
+// import queryKeys from '@/common/constants/queryKeys'
 
 export default function ThankYou({ session }) {
   return (
@@ -18,11 +18,11 @@ export default function ThankYou({ session }) {
         {session ? (
           <>
             <div>
+              <Link href="/">Home</Link>
+              <h1>Thank you!</h1>
               <pre>
                 <code>{JSON.stringify(session, null, 2)}</code>
               </pre>
-              <Link href="/">Home</Link>
-              <h1>Thank you!</h1>
             </div>
           </>
         ) : (
