@@ -22,20 +22,14 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
   const sig = req.headers['stripe-signature']!
   let event: Stripe.Event
 
-  console.log('%c buf ', 'background: red; color: white', buf)
-  console.log('%c sig ', 'background: red; color: white', sig)
-  console.log(
-    '%c process.env.STRIPE_WEBHOOK_SECRET ',
-    'background: red; color: white',
-    process.env.STRIPE_WEBHOOK_SECRET
-  )
-
   try {
     event = stripe.webhooks.constructEvent(
       buf,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET
+      'x' // for local testing
+      // process.env.STRIPE_WEBHOOK_SECRET.
     )
+    console.log('%c event.type ', 'background: red; color: white', event.type)
   } catch (err) {
     // On error, log and return the error message
     console.log(`❌ Error message: ${err.message}`)
@@ -44,6 +38,16 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   switch (event.type) {
+    case 'checkout.session.completed':
+      const checkoutSessionCompleted = event.data.object
+      // Then define and call a function to handle the event checkout.session.completed
+      console.log(
+        '%c checkoutSessionCompleted ',
+        'background: red; color: white',
+        checkoutSessionCompleted
+      )
+      break
+
     case 'customer.created':
       const customerCreated = event.data.object
 
@@ -53,7 +57,9 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
         customerCreated
       )
       break
+
     default:
+      console.log(`Unhandled event type ${event.type}`)
   }
 
   res.status(200).end()

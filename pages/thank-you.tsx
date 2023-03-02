@@ -1,9 +1,6 @@
-// import { useState } from 'react'
 import Head from 'next/head'
-// import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Stripe from 'stripe'
-// import queryKeys from '@/common/constants/queryKeys'
 
 export default function ThankYou({ session }) {
   return (
